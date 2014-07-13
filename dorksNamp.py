@@ -12,7 +12,6 @@
 # by tesla
 #
 
-
 import re
 import time
 import json
@@ -24,9 +23,12 @@ import argparse
 import subprocess
 import requesocks as requests
 
-parser = argparse.ArgumentParser(usage='python dorksNmap.py proxy_lst 3 0.5'
+W = '\033[97m'
+N = '\033[0m'
+
+parser = argparse.ArgumentParser(usage=W+'python dorksNmap.py proxy_lst 3 0.5'
                                  '"inurl:news.asp" 8 12 target_out nmap_out',
-                                 description='Proxy Google Search API : Generate File for NSE')
+                                 description='Proxy Google Search API : Generate File for NSE'+N)
 parser.add_argument('proxies', type = str, help = 'Proxies list file')
 parser.add_argument('pause', type = int, help = 'Pause request (secs)')
 parser.add_argument('timeout', type = float, help = 'Timeout requests (secs)')
@@ -38,9 +40,6 @@ parser.add_argument('noutput', type = str, help = 'Nmap output file')
 
 args = parser.parse_args()
 
-W = '\033[97m'
-N = '\033[0m'
-
 def signal_handler(signal, frame):
   print '' + W
   print 'Quitting..'
@@ -50,7 +49,6 @@ def signal_handler(signal, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 def getResults():
-
   list_url = []
   fin_url = []
   i = 0
@@ -104,10 +102,10 @@ def getResults():
         print(e)
       except requests.exceptions.RequestException as e:
         print(e)
-
       if(entry >= args.start): time.sleep(args.pause)
       y += 1
     entry += 4
+
   if(os.path.isfile(args.output)):
     # To improve
     cmd = "sudo nmap --script http-iis-webdav-vuln -p80,8080 -iL " \
