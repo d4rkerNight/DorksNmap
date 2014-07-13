@@ -27,7 +27,7 @@ W = '\033[97m'
 N = '\033[0m'
 
 parser = argparse.ArgumentParser(usage=W+'python dorksNmap.py proxy_lst 3 0.5'
-                                 '"inurl:news.asp" 8 12 target_out nmap_out',
+                                 ' "inurl:news.asp" 8 12 target_out nmap_out',
                                  description='Proxy Google Search API : Generate File for NSE'+N)
 parser.add_argument('proxies', type = str, help = 'Proxies list file')
 parser.add_argument('pause', type = int, help = 'Pause request (secs)')
