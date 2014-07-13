@@ -41,7 +41,7 @@ parser.add_argument('noutput', type = str, help = 'Nmap output file')
 args = parser.parse_args()
 
 def signal_handler(signal, frame):
-  print '' + W
+  print ''+W
   print 'Quitting..'+N
   exit(0)
 
