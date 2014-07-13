@@ -110,7 +110,7 @@ def getResults():
     entry += 4
   if(os.path.isfile(args.output)):
     # To improve
-    cmd = "sudo nmap --script http-iis-webdav-vuln -p80,8080 -iL "
+    cmd = "sudo nmap --script http-iis-webdav-vuln -p80,8080 -iL " \
       + args.output + " -oX " + args.noutput
     nmap = shlex.split(cmd)
     subprocess.Popen(nmap).wait()
