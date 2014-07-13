@@ -42,8 +42,7 @@ args = parser.parse_args()
 
 def signal_handler(signal, frame):
   print '' + W
-  print 'Quitting..'
-  print '' + N
+  print 'Quitting..'+N
   exit(0)
 
 signal.signal(signal.SIGINT, signal_handler)
