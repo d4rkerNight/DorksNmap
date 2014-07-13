@@ -24,8 +24,8 @@ import argparse
 import subprocess
 import requesocks as requests
 
-parser = argparse.ArgumentParser(usage='python dorksNmap.py proxy_lst 3 0.5 "inurl:news.asp"'
-                                 '8 12 target_out nmap_out',
+parser = argparse.ArgumentParser(usage='python dorksNmap.py proxy_lst 3 0.5'
+                                 '"inurl:news.asp" 8 12 target_out nmap_out',
                                  description='Proxy Google Search API : Generate File for NSE')
 parser.add_argument('proxies', type = str, help = 'Proxies list file')
 parser.add_argument('pause', type = int, help = 'Pause request (secs)')
@@ -58,7 +58,8 @@ def getResults():
   query = urllib.urlencode({'q' : args.dork})
   # https://developers.google.com/errors/?csw=1
   # We received automated requests, such as scraping and prefetching.
-  # Automated requests are prohibited; all requests must be made as a result of an end-user action.
+  # Automated requests are prohibited;
+  # all requests must be made as a result of an end-user action.
   upath = 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0'
 
   while entry <= args.start:
@@ -72,7 +73,9 @@ def getResults():
     for x in fdata: var.append(x.split(' '))
     while y < len(var):
       # To improve
-      session.proxies = {'http':'%s://%s:%s' %(str(var[y][0]), str(var[y][1]), str(var[y][2]).replace('\n', ''))}
+      session.proxies = {'http':'%s://%s:%s' %(str(var[y][0]),
+                                               str(var[y][1]),
+                                               str(var[y][2]).replace('\n', ''))}
       try:
         response = session.get(url, timeout = args.timeout)
         results = response.text
@@ -107,7 +110,8 @@ def getResults():
     entry += 4
   if(os.path.isfile(args.output)):
     # To improve
-    cmd = "sudo nmap --script http-iis-webdav-vuln -p80,8080 -iL " + args.output + " -oX " + args.noutput
+    cmd = "sudo nmap --script http-iis-webdav-vuln -p80,8080 -iL "
+      + args.output + " -oX " + args.noutput
     nmap = shlex.split(cmd)
     subprocess.Popen(nmap).wait()
 
